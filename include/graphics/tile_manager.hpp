@@ -17,6 +17,7 @@ class TileManager
     void set_tile_space(std::size_t rows, std::size_t cols, int width, int height);
     bool wave_collapse_step();
     void draw(sf::RenderWindow &renderer);
+    void reset();
 
   private:
     std::size_t m_rows, m_cols;

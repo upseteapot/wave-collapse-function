@@ -23,6 +23,8 @@ void TileManager::create(std::string sheet_path, std::string conf_path)
   config_file.close();
   
   m_sheet_texture.loadFromFile(sheet_path);
+  m_sheet_texture.setSmooth(false);
+
   m_tiles.resize(m_tile_types);
   for (std::size_t i=0; i < m_tile_types; i++) {
     m_tiles[i].setTexture(m_sheet_texture);
@@ -48,7 +50,7 @@ void TileManager::set_tile_space(std::size_t rows, std::size_t cols, int width, 
       option.push_back(i);
 
   for (auto &tile : m_tiles)
-    tile.setScale(
+      tile.setScale(
       (float)m_width  / tile.getLocalBounds().width,
       (float)m_height / tile.getLocalBounds().height 
     );
@@ -113,6 +115,15 @@ void TileManager::draw(sf::RenderWindow &renderer)
         renderer.draw(m_tiles[index]);
       }
     }
+}
+
+void TileManager::reset()
+{
+  for (auto &option : m_options) {
+    option.clear();
+    for (std::size_t i=0; i < m_tile_types; i++)
+      option.push_back(i);
+  }
 }
 
 
